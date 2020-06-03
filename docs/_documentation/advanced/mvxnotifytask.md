@@ -97,7 +97,9 @@ public class MyViewModel : MvxViewModel
     {
         _someService = someService;
 
-        MyCommand = new MvxCommand(() => MyTaskNotifier = MvxNotifyTask.Create(() => MyMethodAsync(), onException: ex => OnException(ex)));
+        MyCommand = new MvxCommand(
+            () => MyTaskNotifier = MvxNotifyTask.Create(asyncAction: () => MyMethodAsync(), onException: ex => OnException(ex))
+        );
     }
 
     public void Prepare()
